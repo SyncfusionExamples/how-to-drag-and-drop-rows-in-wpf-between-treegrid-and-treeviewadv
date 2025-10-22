@@ -1,8 +1,8 @@
-# How to drag and drop rows in wpf between treegrid and treeviewadv?
+# How to Drag and Drop Rows between WPF TreeGrid and WPF TreeViewAdv?
 
-This example illustrates how to drag and drop rows in between [WPF TreeGrid](https://www.syncfusion.com/wpf-controls/treegrid) and [WPF TreeViewAdv](https://help.syncfusion.com/cr/wpf/Syncfusion.Windows.Tools.Controls.TreeViewAdv.html).
+This example illustrates how to drag and drop rows in between [WPF TreeGrid](https://www.syncfusion.com/wpf-controls/treegrid) (SfTreeGrid) and [WPF TreeViewAdv](https://help.syncfusion.com/wpf/classic/treeview/overview).
 
-You can drag and drop the items between `TreeViewAdv` and `TreeGrid` by wiring the [Drop](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html#Syncfusion_UI_Xaml_TreeGrid_TreeGridRowDragDropController_Drop) and [DragStart](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html#Syncfusion_UI_Xaml_TreeGrid_TreeGridRowDragDropController_DragStart) events from the [TreeGridRowDragDropController](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html) class.
+You can drag and drop the items between TreeViewAdv and TreeGrid by wiring the [Drop](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html#Syncfusion_UI_Xaml_TreeGrid_TreeGridRowDragDropController_Drop) and [DragStart](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html#Syncfusion_UI_Xaml_TreeGrid_TreeGridRowDragDropController_DragStart) events from the [TreeGridRowDragDropController](https://help.syncfusion.com/cr/wpf/Syncfusion.UI.Xaml.TreeGrid.TreeGridRowDragDropController.html) class.
 
 ``` c#
 private void RowDragDropController_DragStart(object sender, TreeGridRowDragStartEventArgs e)
@@ -51,6 +51,7 @@ private void RowDragDropController_Drop(object sender, TreeGridRowDropEventArgs 
 
                 if (treeNode == null)
                     return;
+
                 var data = treeNode.Item;
                 AssociatedObject.sfTreeGrid.SelectionController.SuspendUpdates();
                 var itemIndex = -1;
@@ -73,6 +74,7 @@ private void RowDragDropController_Drop(object sender, TreeGridRowDropEventArgs 
                 {
                     if (!treeNode.IsExpanded)
                         AssociatedObject.sfTreeGrid.ExpandNode(treeNode);
+
                     parentNode = treeNode;
                     var parent = parentNode.Item as EmployeeInfo;
                     newItem = new EmployeeInfo() { FirstName = record.FirstName, LastName = record.LastName, ID = record.ID, Salary = record.Salary, Title = record.Title, ReportsTo = parent.ID };
@@ -84,12 +86,9 @@ private void RowDragDropController_Drop(object sender, TreeGridRowDropEventArgs 
                 {
                     if (treeNode.ParentNode != null)
                     {
-
                         var collection = AssociatedObject.sfTreeGrid.View.GetPropertyAccessProvider().GetValue(treeNode.ParentNode.Item, AssociatedObject.sfTreeGrid.ChildPropertyName) as IEnumerable;
-
                         sourceCollection = GetSourceListCollection(collection);
                     }
-
                     else
                     {
                         sourceCollection = GetSourceListCollection(AssociatedObject.sfTreeGrid.View.SourceCollection);
@@ -101,7 +100,6 @@ private void RowDragDropController_Drop(object sender, TreeGridRowDropEventArgs 
                         itemIndex += 1;
                     }
                 }
-
                 else if (dropPosition == "DropAsChild")
                 {
                     var collection = AssociatedObject.sfTreeGrid.View.GetPropertyAccessProvider().GetValue(data, AssociatedObject.sfTreeGrid.ChildPropertyName) as IEnumerable;
@@ -131,7 +129,7 @@ private void RowDragDropController_Drop(object sender, TreeGridRowDropEventArgs 
 }
 ```
 
-In `TreeViewAdv`, you need to wire the `Drop` event,
+In TreeViewAdv, you need to wire the Drop event,
 
 ``` c#
 private void Treeview_Drop(object sender, DragEventArgs e)
