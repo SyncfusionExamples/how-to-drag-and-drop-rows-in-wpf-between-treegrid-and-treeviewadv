@@ -151,4 +151,4 @@ private void Treeview_Drop(object sender, DragEventArgs e)
 }
 ```
 
-![How to Drag and Drop Rows between WPF TreeGrid and WPF TreeViewAdv](DragAndDrop.png)
+![Image shows drag and drop between TreeGrid and TreeViewAdv](DragAndDrop.png)
