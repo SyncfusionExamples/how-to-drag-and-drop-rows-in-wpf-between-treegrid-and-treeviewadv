@@ -151,4 +151,4 @@ private void Treeview_Drop(object sender, DragEventArgs e)
 }
 ```
 
-![Image shows drag and drop between TreeGrid and TreeViewAdv](DragAndDrop.png)
+![Drag and drop between TreeGrid and TreeViewAdv](DragAndDrop.png)
